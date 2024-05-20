@@ -21,7 +21,7 @@ COPY backend/requirements.txt /app/
 # Install any needed packages specified in requirements.txt
 RUN pip install --upgrade pip
 RUN pip install -r requirements.txt
-RUN sudo apt install gunicorn3
+RUN apt install gunicorn3
 # Copy the current directory contents into the container at /app
 COPY backend /app/
 
