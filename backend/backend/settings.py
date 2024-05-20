@@ -49,8 +49,7 @@ INSTALLED_APPS = [
     "dj_rest_auth",
     'drf_spectacular',
     # my apps
-    "accounts",
-    "backend.middleware.HealthCheckMiddleware"
+    "accounts"
 ]
 
 REST_FRAMEWORK = {
@@ -78,6 +77,7 @@ ACCOUNT_EMAIL_VERIFICATION = "none"
 
 
 MIDDLEWARE = [
+    'backend.middleware.HealthCheckMiddleware',
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
