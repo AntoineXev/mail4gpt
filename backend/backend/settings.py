@@ -30,7 +30,7 @@ DEBUG = os.environ.get("DEBUG", "True") == "True"
 
 DEPLOY_DOMAIN = os.environ.get("DEPLOY_DOMAIN", "api.mail4gpt.com")
 
-ALLOWED_HOSTS = ["127.0.0.1", "0.0.0.0", DEPLOY_DOMAIN]
+ALLOWED_HOSTS = ["127.0.0.1", "0.0.0.0", DEPLOY_DOMAIN, "localhost"]
 
 
 # Application definition
