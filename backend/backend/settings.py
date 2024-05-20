@@ -50,6 +50,7 @@ INSTALLED_APPS = [
     'drf_spectacular',
     # my apps
     "accounts",
+    "middleware.HealthCheckMiddleware"
 ]
 
 REST_FRAMEWORK = {
