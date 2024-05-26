@@ -34,6 +34,7 @@ class ReadEmail(APIView):
             fields={
                 "latest_count": serializers.IntegerField(),
                 "show_unseen": serializers.BooleanField(),
+                "mailbox": serializers.StringField(),
             },
         ),
     )
@@ -41,7 +42,7 @@ class ReadEmail(APIView):
         latest_count = int(request.GET.get("latest_count", 5))
         show_unseen = request.GET.get("show_unseen", True)
         criteria = "UNSEEN" if show_unseen else "ALL"
-        mailbox(request.GET.get("mailbox", "inbox"))
+        mailbox = request.GET.get("mailbox", "inbox")
         m = EmailService()
         emails = m.get_emails(criteria=criteria, latest_count=latest_count)
 
