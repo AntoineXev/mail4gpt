@@ -29,7 +29,6 @@ class ReadEmail(APIView):
     permission_classes = [permissions.IsAuthenticated]
     serializer_class = EmailSerializer
 
-    @api_view(['GET'])
     @extend_schema(
         parameters=[
         OpenApiParameter(
@@ -52,8 +51,7 @@ class ReadEmail(APIView):
             required=False
         )],
     )
-
-    def get_mail(request):
+    def get(self, request):
         latest_count = int(request.GET.get("latest_count", 5))
         show_unseen = request.GET.get("show_unseen", True)
         criteria = "UNSEEN" if show_unseen else "ALL"

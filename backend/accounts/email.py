@@ -48,8 +48,6 @@ class EmailService:
 
         # Log in
         mail.login(self.user, self.password)
-
-        # Select the mailbox (e.g., INBOX)
         mail.select(mailbox)
 
         # Search for emails
