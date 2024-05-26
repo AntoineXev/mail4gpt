@@ -1,6 +1,7 @@
 from rest_framework import permissions, status
 from rest_framework.response import Response
 from rest_framework.views import APIView
+from rest_framework.decorators import api_view
 from drf_spectacular.utils import (
     extend_schema,
     OpenApiParameter,
@@ -28,14 +29,30 @@ class ReadEmail(APIView):
     permission_classes = [permissions.IsAuthenticated]
     serializer_class = EmailSerializer
 
+    @api_view(['GET'])
     @extend_schema(
         parameters=[
-          QuerySerializer,  # serializer fields are converted to parameters
-          OpenApiParameter("latest_count",  OpenApiParameter.QUERY),
-          OpenApiParameter("show_unseen", OpenApiParameter.QUERY),
-          OpenApiParameter("mailbox", OpenApiParameter.QUERY)
-        ],
+        OpenApiParameter(
+            name='mailbox', 
+            type=OpenApiTypes.STR, 
+            description='The mailbox type', 
+            required=False,
+            enum=['inbox', 'archive']  # Enum values
+        ),
+        OpenApiParameter(
+            name='latest_count', 
+            type=OpenApiTypes.INT, 
+            description='The number of emails to retrieve', 
+            required=False
+        ),
+        OpenApiParameter(
+            name='show_unseen', 
+            type=OpenApiTypes.BOOL, 
+            description='Flag to only show unseen emails', 
+            required=False
+        )],
     )
+    
     def get(self, request, format=None):
         latest_count = int(request.GET.get("latest_count", 5))
         show_unseen = request.GET.get("show_unseen", True)
