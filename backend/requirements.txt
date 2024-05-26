@@ -6,3 +6,5 @@ dj-rest-auth
 drf-spectacular
 python-dotenv
 gunicorn
+psycopg2-binary
+psycopg2

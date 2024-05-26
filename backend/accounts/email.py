@@ -36,7 +36,7 @@ class EmailService:
             smtp.login(self.user, self.password)
             smtp.send_message(msg)
 
-    def get_emails(self, criteria="ALL", latest_count=5):
+    def get_emails(self, criteria="ALL", latest_count=5, mailbox='inbox'):
 
         if criteria not in ["ALL", "UNSEEN"]:
             raise Exception("Unknown search critaria. It should be ALL or UNSEEN")
@@ -50,7 +50,7 @@ class EmailService:
         mail.login(self.user, self.password)
 
         # Select the mailbox (e.g., INBOX)
-        mail.select('inbox')
+        mail.select(mailbox)
 
         # Search for emails
         _, data = mail.search(None, criteria)  # You can change 'ALL' to your preferred criteria
