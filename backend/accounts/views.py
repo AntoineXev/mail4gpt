@@ -29,14 +29,12 @@ class ReadEmail(APIView):
     serializer_class = EmailSerializer
 
     @extend_schema(
-        request=inline_serializer(
-            name="ReadEmailSerializer",
-            fields={
-                "latest_count": serializers.IntegerField(),
-                "show_unseen": serializers.BooleanField(),
-                "mailbox": serializers.StringField(),
-            },
-        ),
+        parameters=[
+          QuerySerializer,  # serializer fields are converted to parameters
+          OpenApiParameter("latest_count",  OpenApiParameter.QUERY),
+          OpenApiParameter("show_unseen", OpenApiParameter.QUERY),
+          OpenApiParameter("mailbox", OpenApiParameter.QUERY)
+        ],
     )
     def get(self, request, format=None):
         latest_count = int(request.GET.get("latest_count", 5))
