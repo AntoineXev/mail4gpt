@@ -52,14 +52,14 @@ class ReadEmail(APIView):
             required=False
         )],
     )
-    
-    def get(self, request, format=None):
+
+    def get_mail(request):
         latest_count = int(request.GET.get("latest_count", 5))
         show_unseen = request.GET.get("show_unseen", True)
         criteria = "UNSEEN" if show_unseen else "ALL"
         mailbox = request.GET.get("mailbox", "inbox")
         m = EmailService()
-        emails = m.get_emails(criteria=criteria, latest_count=latest_count)
+        emails = m.get_emails(criteria=criteria, latest_count=latest_count, mailbox=mailbox)
 
         return Response(
             emails,
